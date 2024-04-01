@@ -6,17 +6,17 @@ jobs:
   generate_csv:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      uses: actions/checkout@v3
       - name: Run Python script
-      - run: python CSV_Generator.py
+      run: python CSV_Generator.py
       - name: Add generated file
-      - run: git add .
+      run: git add .
       - name: Commit changes
-        run: git commit -m "Add generated CSV file (automated)"
+      run: git commit -m "Add generated CSV file (automated)"
       - name: Push changes
-      - uses: actions/checkout@v3
-      - with:
+      uses: actions/checkout@v3
+      with:
           fetch-token: ${{ secrets.GITHUB_TOKEN }}
-      - env:
+      env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: git push origin main
+      run: git push origin main
