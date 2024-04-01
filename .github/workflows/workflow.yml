@@ -1,36 +1,22 @@
+---
 name: Generate and Commit CSV
-
 on:
-  push:  # Trigger on push events
-
+  push: null
 jobs:
   generate_csv:
-    runs-on: ubuntu-latest  # Run on Ubuntu runners
-
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3  # Checkout code from GitHub
-
-      - name: Install Python dependencies
-        run: python -m pip install csv  # Install required Python library
-
+      - uses: actions/checkout@v3
       - name: Run Python script
-        run: python CSV_Generator.py  # Execute your Python script
-
+      - run: python CSV_Generator.py
       - name: Add generated file
-        run: git add generated_data.csv  # Stage the generated file
-
-      - name: Commit changes (if any)
-        run: |  # Conditional commit (avoids empty commits)
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "GitHub Actions"
-          if [[ $(git status --porcelain --untracked-files=no) ]]; then
-            git commit -m "Add generated CSV file (automated)"
-          fi
-
-      - name: Push changes (if any)
-        uses: actions/checkout@v3
-        with:
+      - run: git add .
+      - name: Commit changes
+        run: git commit -m "Add generated CSV file (automated)"
+      - name: Push changes
+      - uses: actions/checkout@v3
+      - with:
           fetch-token: ${{ secrets.GITHUB_TOKEN }}
-        env:
+      - env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: git push origin main  # Push to the 'main' branch
+        run: git push origin main
