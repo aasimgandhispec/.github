@@ -2,7 +2,7 @@ name: Run CSV Generator
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Adjust the cron expression as needed
+    - cron: '0 1 * * *'  # Adjust the cron expression as needed
 
 jobs:
   build:
