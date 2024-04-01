@@ -39,6 +39,3 @@ jobs:
                 writer.writerows(data)
 
             print(f"CSV file '{csv_file}' generated successfully!")
-
-        # Optional: Handle errors (fail the step if the script encounters any issues)
-        fail-on-error: true
