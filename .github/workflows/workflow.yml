@@ -10,16 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3  # Checkout code from GitHub
 
-      - name: Install Python dependencies
-        run: python -m pip install csv
-
       - name: Run Python script
         run: python CSV_Generator.py
 
       - name: Add generated file
-        uses: git/add-action@v1
-        with:
-          path: generated_data.csv
+        run: git add .
 
       - name: Commit changes
         run: git commit -m "Add generated CSV file (automated)"
@@ -30,4 +25,4 @@ jobs:
           fetch-token: ${{ secrets.GITHUB_TOKEN }}  # Access token with push permissions
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: git push origin master
+        run: git push origin main
